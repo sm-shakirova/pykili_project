@@ -17,7 +17,7 @@ def parse_text(data):
 
 
 if __name__ == "__main__":
-    with open('example.json', 'r', encoding='utf-8') as file:
+    with open(input('Путь к файлу с текстом: '), 'r', encoding='utf-8') as file:
         messages = json.load(file)
     with open(input('Назвать новый файл: '), 'w', encoding='utf-8') as new_file:
         json.dump(parse_text(messages), new_file, ensure_ascii=False, indent=2)
