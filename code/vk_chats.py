@@ -6,7 +6,12 @@ import json
 def get_messages(file_path):
     with open(file_path, 'r', encoding='Windows-1251') as file:
         data = file.read()
+    smiles = set(re.findall(r'\d*;?&#\d*;?', data))
+    for smile in smiles:
+        data = data.replace(smile, '')
     messages = re.findall(r'(?<=<div>).+?(?=<div class="kludges">)', data)
+    for ind, message in enumerate(messages):
+        messages[ind] = message.replace('<br>', '').replace('&quot;', '')
     return messages
 
 
