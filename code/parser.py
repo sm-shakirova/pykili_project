@@ -9,7 +9,7 @@ def parse_text(data):
     text = [word.lower().strip(punctuation) for word in data.split()]
     text = [word for word in text if word != '']
     result = []
-    morph = MorphAnalyzer()  # NB! большой файл может грузить несоклько минут
+    morph = MorphAnalyzer()  # NB! большой файл может грузить долго
     for word in text:
         parser = morph.parse(word)[0]
         dct = {
