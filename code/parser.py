@@ -15,7 +15,7 @@ def parse_text(data):
         dct = {
                   'word': str(parser.word),
                   'lemma': str(parser.normal_form),
-                  'part of speech': str(parser.tag.POS),
+                  'POS': str(parser.tag.POS),
         }
         tags = str(parser.tag).replace(f'{str(parser.tag.POS)},', '')
         if tags == str(parser.tag.POS):
