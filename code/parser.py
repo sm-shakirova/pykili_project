@@ -4,14 +4,25 @@ import json
 
 
 def parse_text(data):
-    text = ' '.join(data)
-    text = [word.lower().strip(punctuation) for word in text.split()]
+    if isinstance(data, list):
+        data = ' '.join(data)
+    text = [word.lower().strip(punctuation) for word in data.split()]
     text = [word for word in text if word != '']
     result = []
-    morph = MorphAnalyzer()
+    morph = MorphAnalyzer()  # NB! большой файл может грузить несоклько минут
     for word in text:
         parser = morph.parse(word)[0]
-        dct = {'word': str(parser.word), 'lemma': str(parser.normal_form), 'tag': str(parser.tag)}
+        dct = {
+                  'word': str(parser.word),
+                  'lemma': str(parser.normal_form),
+                  'part of speech': str(parser.tag.POS),
+        }
+        tags = str(parser.tag).replace(f'{str(parser.tag.POS)},', '')
+        if tags == str(parser.tag.POS):
+            dct['tags'] = None
+        elif tags != '':
+            dct['tags'] = tags
+        # список тэгов: https://pymorphy2.readthedocs.io/en/latest/user/grammemes.html
         result.append(dct)
     return result
 
