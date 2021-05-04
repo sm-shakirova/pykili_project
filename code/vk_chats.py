@@ -4,7 +4,7 @@ import json
 
 
 def get_messages(file_path):
-    with open(file_path, 'r', encoding='latin-1') as file:
+    with open(file_path, 'r', encoding='Windows-1251') as file:
         data = file.read()
     messages = re.findall(r'(?<=<div>).+?(?=<div class="kludges">)', data)
     return messages
