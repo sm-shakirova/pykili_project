@@ -24,5 +24,5 @@ if __name__ == "__main__":
         for file in files:
             texts = get_messages(os.path.join(dirs, file))
             all_texts.extend(texts)
-    with open('messages.json', 'w', encoding='utf-8') as new_file:
+    with open(input('Назвать новый файл: '), 'w', encoding='utf-8') as new_file:
         json.dump(all_texts, new_file, ensure_ascii=False, indent=2)
