@@ -19,7 +19,8 @@ def get_messages(file_path):
 if __name__ == "__main__":
     path = input('Путь к папке с сообщениями из VK на вашем компьютере: ')
     all_texts = []
-    for dirs, folder, files in os.walk(path):  # еще есть listdir, но он проходится только по поверхности
+    for dirs, folder, files in os.walk(path):  
+        # еще есть listdir, но он проходится только по поверхности
         # документация по walk: https://docs.python.org/3/library/os.html#os.walk
         # рекурсивная штука, поэтому находит все файлы, в том числе во внутренних папках
         for file in files:
