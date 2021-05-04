@@ -14,6 +14,7 @@
 - os
 - re
 - json
+- string
 - pymorphy
 
 ### Участники ###
