@@ -6,10 +6,11 @@ import json
 def get_messages(file_path):
     with open(file_path, 'r', encoding='Windows-1251') as file:
         data = file.read()
-    smiles = set(re.findall(r'\d*;?&#\d*;?', data))
-    for smile in smiles:
+    for smile in set(re.findall(r'\d*;?&#\d*;?', data)):  # удаляет смайлики
         data = data.replace(smile, '')
-    messages = re.findall(r'(?<=<div>).+?(?=<div class="kludges">)', data)
+    for link in set(re.findall(r'http\S+', data)):  # удаляет ссылки
+        data = data.replace(link, '')
+    messages = re.findall(r'(?<=<div>).+?(?=<div class="kludges">)', data)  # находит тексты сообщений
     for ind, message in enumerate(messages):
         messages[ind] = message.replace('<br>', '').replace('&quot;', '')
     return messages
