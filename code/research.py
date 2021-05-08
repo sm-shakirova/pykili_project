@@ -12,7 +12,7 @@ def sort_words(lst):
             for noun_ind in noun_indexes:
                 if noun_ind - ind in (1, 2):
                     noun = lst[noun_ind]
-                elif noun_ind - ind in (-1, -2):
+                elif noun_ind - ind == -1:
                     noun = lst[noun_ind]
             if noun \
                     and word['year'] == noun['year'] \
