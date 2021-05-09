@@ -9,4 +9,6 @@ with open("tg_1.json", 'r', encoding="utf-8") as f:
         for j in sms:
             text = j['text']
             if type(text) == str:
-                print(text)
+                with open(input("Название файла: "), "a", encoding="utf-8") as f:
+                    f.write(text)
+
