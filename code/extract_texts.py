@@ -65,4 +65,4 @@ if __name__ == "__main__":
                 texts = txt_books(os.path.join(dirs, file))
             data.extend(texts)
     with open(input('Назвать новый файл: '), 'w', encoding='utf-8') as new_file:
-        json.dump(data, new_file, ensure_ascii=False, indent=2)
+        json.dump(data, new_file, ensure_ascii=False, indent=1)
