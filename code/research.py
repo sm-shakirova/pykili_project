@@ -10,9 +10,9 @@ def sort_words(lst):
     for ind, word in enumerate(lst):
         if word['POS'] == 'ADJF':
             for noun_ind in noun_indexes:
-                if noun_ind - ind in (1, 2):
+                if noun_ind - ind == 1:
                     noun = lst[noun_ind]
-                elif noun_ind - ind == -1:
+                elif noun_ind - ind == 2:
                     noun = lst[noun_ind]
             if noun \
                     and word['year'] == noun['year'] \
@@ -26,9 +26,13 @@ def sort_words(lst):
                         dct[word['year']][noun['lemma']] = [word['lemma']]
                 else:
                     dct[word['year']] = {noun['lemma']: [word['lemma']]}
-    for year, inner_dct in dct.items():
-        for noun, adj in inner_dct.items():
-            inner_dct[noun] = list(set(adj))  # нужно отсортировать еще и по количеству
+    for year, inner_dict in dct.items():
+        for noun, inner_list in inner_dict.items():
+            adj_dict = dict.fromkeys(set(inner_list))
+            for adj in adj_dict:
+                adj_dict[adj] = inner_list.count(adj)
+            adj_dict = sorted(adj_dict, key=adj_dict.get, reverse=True)  # сортировка по частотности
+            inner_dict[noun] = [key for key in adj_dict]
     return dct
 
 
