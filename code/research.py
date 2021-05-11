@@ -4,7 +4,7 @@ import os
 
 def extract_adjectives(file):
     """Функция для сортировки сочетаний прилагательных с существительными по годам"""
-    with open(input(file), 'r', encoding='utf-8') as f:
+    with open(file, 'r', encoding='utf-8') as f:
         lst = json.load(f)
     noun_indexes = []
     for ind, word in enumerate(lst):
