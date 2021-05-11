@@ -15,7 +15,8 @@ def vk_messages(file_path):
     for ind, message in enumerate(messages):
         year = re.search(r'\d{4}', message)[0]  # находит год
         message = re.search(r'(?<=<div>).*', message)[0]  # текст сообщения
-        message = message.replace('<br>', '').replace('&quot;', '')
+        message = message.replace('<br>', '')
+        message = re.sub(r'&.+?;', '', message)
         if message != '':
             messages[ind] = [year, message]
     return messages
