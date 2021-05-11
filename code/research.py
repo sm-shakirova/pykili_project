@@ -2,12 +2,13 @@ import json
 
 
 def sort_words(lst):
+    """Функция для сортировки сочетаний прилагательных с существительными по годам"""
     noun_indexes = []
     for ind, word in enumerate(lst):
         if word['POS'] == 'NOUN':
             noun_indexes.append(ind)
     dct = {}
-    for ind, word in enumerate(lst):
+    for ind, word in enumerate(lst):  # NB! сортирует долго
         if word['POS'] == 'ADJF':
             for noun_ind in noun_indexes:
                 if noun_ind - ind == 1:
