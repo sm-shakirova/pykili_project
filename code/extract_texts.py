@@ -60,10 +60,12 @@ if __name__ == "__main__":
             name, extension = os.path.splitext(file)
             if extension == '.html':
                 texts = vk_messages(os.path.join(dirs, file))
+                data.extend(texts)
             elif extension == '.json':
                 texts = tg_messages(os.path.join(dirs, file))
+                data.extend(texts)
             elif extension == '.txt':
                 texts = txt_books(os.path.join(dirs, file))
-            data.extend(texts)
+                data.append(texts)
     with open(input('Назвать новый файл: '), 'w', encoding='utf-8') as new_file:
         json.dump(data, new_file, ensure_ascii=False, indent=1)
