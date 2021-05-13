@@ -40,7 +40,7 @@ if __name__ == "__main__":
     main_dict = {}
     for dirs, folder, files in os.walk(path):
         for file in files:
-            result = count_pos(file)
+            result = count_pos(os.path.join(dirs, file))
             for year, inner_dict in result.items():
                 if year not in main_dict:
                     main_dict[year] = {}
