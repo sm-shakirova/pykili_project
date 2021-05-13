@@ -25,6 +25,7 @@
 - re
 - json
 - string
+- collections
 - pymorphy
 
 ### Участники ###
