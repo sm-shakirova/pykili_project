@@ -51,7 +51,7 @@ if __name__ == "__main__":
     main_dict = {}
     for dirs, folder, files in os.walk(path):
         for file in files:
-            result = extract_adjectives(file)
+            result = extract_adjectives(os.path.join(dirs, file))
             for year, inner_dict in result.items():
                 if year not in main_dict:
                     main_dict[year] = {}
