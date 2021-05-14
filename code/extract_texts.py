@@ -9,17 +9,17 @@ def vk_messages(file_path):
         data = file.read()
     for smile in set(re.findall(r'\d*;?&#\d*;?', data)):  # удаляет смайлики
         data = data.replace(smile, '')
-    for link in set(re.findall(r'http\S+', data)):  # удаляет ссылки
-        data = data.replace(link, '')
-    for link in set(re.findall(r'vk.com\S+', data)):  # удаляет ссылки на ВК
+    for link in set(re.findall(r'[^>\s]+\.(?:com|ru)[^<\s]+', data)):  # удаляет ссылки
         data = data.replace(link, '')
     messages = re.findall(r'(?<=<div class="message__header">).+?\n.+?(?=<div class="kludges">)', data)
     for ind, message in enumerate(messages):
-        year = re.search(r'\d{4}', message)[0]  # находит год
+        year = None
+        if re.search(r'20\d\d', message):
+            year = int(re.search(r'20\d\d', message)[0])  # находит год
         message = re.search(r'(?<=<div>).*', message)[0]  # текст сообщения
         message = message.replace('<br>', '')
         message = re.sub(r'&.+?;', '', message)
-        if message != '':
+        if message != '' and year is not None:
             messages[ind] = [year, message]
     return messages
 
