@@ -2,10 +2,8 @@ import json
 import os
 
 
-def extract_adjectives(file):
+def extract_adjectives(lst):
     """Функция для сортировки сочетаний прилагательных с существительными по годам"""
-    with open(file, 'r', encoding='utf-8') as f:
-        lst = json.load(f)
     noun_indexes = []
     for ind, word in enumerate(lst):
         if word['POS'] == 'NOUN':
@@ -13,6 +11,7 @@ def extract_adjectives(file):
     dct = {}
     for ind, word in enumerate(lst):
         if word['POS'] == 'ADJF':
+            noun = False
             for noun_ind in noun_indexes:
                 if noun_ind - ind == 1:
                     noun = lst[noun_ind]
@@ -47,7 +46,7 @@ def sort_adjectives(dct):
 
 
 if __name__ == "__main__":
-    path = input('Путь к папке со всеми файлами с разметкой: ')
+    """path = input('Путь к папке со всеми файлами с разметкой: ')
     main_dict = {}
     for dirs, folder, files in os.walk(path):
         for file in files:
@@ -58,6 +57,9 @@ if __name__ == "__main__":
                 for noun, inner_list in inner_dict.items():
                     if noun not in main_dict[year]:
                         main_dict[year][noun] = []
-                    main_dict[year][noun].extend(inner_list)
+                    main_dict[year][noun].extend(inner_list)"""
+    with open(input('Название файла: '), 'r', encoding='utf-8') as f:
+        lst = json.load(f)
+    dct = extract_adjectives(lst)
     with open(input('Назвать файл с результатами по прилагательным: '), 'w', encoding='utf-8') as new_file:
-        json.dump(sort_adjectives(main_dict), new_file, ensure_ascii=False, indent=1)
+        json.dump(sort_adjectives(dct), new_file, ensure_ascii=False, indent=1)
