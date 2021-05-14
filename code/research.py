@@ -46,18 +46,6 @@ def sort_adjectives(dct):
 
 
 if __name__ == "__main__":
-    """path = input('Путь к папке со всеми файлами с разметкой: ')
-    main_dict = {}
-    for dirs, folder, files in os.walk(path):
-        for file in files:
-            result = extract_adjectives(os.path.join(dirs, file))
-            for year, inner_dict in result.items():
-                if year not in main_dict:
-                    main_dict[year] = {}
-                for noun, inner_list in inner_dict.items():
-                    if noun not in main_dict[year]:
-                        main_dict[year][noun] = []
-                    main_dict[year][noun].extend(inner_list)"""
     with open(input('Название файла: '), 'r', encoding='utf-8') as f:
         lst = json.load(f)
     dct = extract_adjectives(lst)
