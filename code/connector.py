@@ -17,21 +17,7 @@ def connect_adjectives(dirs, files):
     return main_dict
 
 
-def connect_pos(dirs, files):
-    main_dict = None
-    for file in files:
-        with open(os.path.join(dirs, file), 'r', encoding='utf-8') as f:
-            dct = json.load(f)
-        for pos, inner_dict in dct.items():
-            if not main_dict:
-                main_dict = dct
-            else:
-                for year, value in inner_dict.items():
-                    main_dict[pos][year] += value
-    return main_dict
-
-
-def connect():
+def connect_parsed():
     pass
 
 
@@ -41,6 +27,6 @@ if __name__ == '__main__':
         if 'adjectives' in dirs:
             with open(input('Назвать файл с результатами по прилагательным: '), 'w', encoding='utf-8') as new_file:
                 json.dump(connect_adjectives(dirs, files), new_file, ensure_ascii=False, indent=1)
-        elif 'pos' in dirs:
-            with open(input('Назвать файл с результатами по частям речи: '), 'w', encoding='utf-8') as new_file:
-                json.dump(connect_pos(dirs, files), new_file, ensure_ascii=False, indent=1)
+        elif 'parsed' in dirs:
+            with open(input('Назвать файл с объединенными распарсенными файлами: '), 'w', encoding='utf-8') as new_file:
+                json.dump(connect_parsed(dirs, files), new_file, ensure_ascii=False, indent=1)
