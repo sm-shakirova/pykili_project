@@ -17,8 +17,16 @@ def connect_adjectives(dirs, files):
     return main_dict
 
 
-def connect_parsed():
-    pass
+def connect_parsed(dirs, files):
+    main_list = None
+    for file in files:
+        with open(os.path.join(dirs, file), 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        if main_list is None:
+            main_list = data
+        else:
+            main_list.extend(data)
+    return main_list
 
 
 if __name__ == '__main__':
