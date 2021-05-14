@@ -36,15 +36,6 @@ def find_percent(dct):
 
 
 if __name__ == "__main__":
-    path = input('Путь к папке со всеми файлами с разметкой: ')
-    main_dict = {}
-    for dirs, folder, files in os.walk(path):
-        for file in files:
-            result = count_pos(os.path.join(dirs, file))
-            for year, inner_dict in result.items():
-                if year not in main_dict:
-                    main_dict[year] = {}
-                for pos, value in inner_dict.items():
-                    main_dict[year][pos] += value
+    main_dict = count_pos(input('Название файла: '))
     with open(input('Назвать файл с результатами по частям речи: '), 'w', encoding='utf-8') as new_file:
         json.dump(find_percent(main_dict), new_file, ensure_ascii=False, indent=1)
