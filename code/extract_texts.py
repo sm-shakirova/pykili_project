@@ -11,6 +11,8 @@ def vk_messages(file_path):
         data = data.replace(smile, '')
     for link in set(re.findall(r'http\S+', data)):  # удаляет ссылки
         data = data.replace(link, '')
+    for link in set(re.findall(r'vk.com\S+', data)):  # удаляет ссылки на ВК
+        data = data.replace(link, '')
     messages = re.findall(r'(?<=<div class="message__header">).+?\n.+?(?=<div class="kludges">)', data)
     for ind, message in enumerate(messages):
         year = re.search(r'\d{4}', message)[0]  # находит год
