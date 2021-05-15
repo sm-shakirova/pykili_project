@@ -9,10 +9,10 @@ def parse_text(data):
     morph = MorphAnalyzer()
     if isinstance(data[0], list):
         for el in data:
-            text = [word.lower().strip(punctuation) for word in el[1].split()]
+            text = [word.lower().strip(punctuation) for word in el[1].split()]  # делит текст на слова, чистит от знаков препинания
             text = [word for word in text if word != '']
             for word in text:
-                parser = morph.parse(word)[0]
+                parser = morph.parse(word)[0]  # делает морфологический разбор
                 dct = {
                         'year': el[0],
                         'word': str(parser.word),
