@@ -11,15 +11,15 @@ def count_pos(file):
     for tag in tags:
         dct[tag] = {}
     for word in lst:
-        if word['POS'] in ('ADJF', 'ADJS', 'COMP'):
+        if word['POS'] in ('ADJF', 'ADJS', 'COMP'):  # обобщает прилагательные
             if word['year'] not in dct['ADJ']:
                 dct['ADJ'][word['year']] = 0
             dct['ADJ'][word['year']] += 1
-        elif word['POS'] in ('VERB', 'INFN'):
+        elif word['POS'] in ('VERB', 'INFN'):  # обощает глаголы
             if word['year'] not in dct['VERB']:
                 dct['VERB'][word['year']] = 0
             dct['VERB'][word['year']] += 1
-        elif word['POS'] == 'None':
+        elif word['POS'] == 'None':  # также считает количество слов, которые парсер не смог опознать
             if word['year'] not in dct['UNKN']:
                 dct['UNKN'][word['year']] = 0
             dct['UNKN'][word['year']] += 1
@@ -28,7 +28,7 @@ def count_pos(file):
             if word['year'] not in dct[word['POS']]:
                 dct[word['POS']][word['year']] = 0
             dct[word['POS']][word['year']] += 1
-        if word['year'] not in dct['ALL']:
+        if word['year'] not in dct['ALL']:  # запоминает общее количество слов
             dct['ALL'][word['year']] = 0
         dct['ALL'][word['year']] += 1
     return dct
@@ -40,7 +40,7 @@ def find_percent(dct):
     for pos, inner_dict in dct.items():
         new_list = []
         for year, value in inner_dict.items():
-            percent = (value / dct['ALL'][year]) * 100
+            percent = (value / dct['ALL'][year]) * 100  # вычисляет процент употребления отдельной части речи относительно общего количества слов
             new_dict = {'year': year, 'variable': round(percent, 2)}
             new_list.append(new_dict)
         main_dict[pos] = new_list
