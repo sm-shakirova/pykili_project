@@ -32,9 +32,9 @@ def connect_parsed(dirs, files):
 if __name__ == '__main__':
     path = input('Путь к папке с файлами: ')
     for dirs, folder, files in os.walk(path):
-        if 'adjectives' in dirs:
+        if 'adjectives_chats' in dirs:
             with open(input('Назвать файл с результатами по прилагательным: '), 'w', encoding='utf-8') as new_file:
                 json.dump(connect_adjectives(dirs, files), new_file, ensure_ascii=False, indent=1)
-        elif 'parsed' in dirs:
+        elif 'parsed_chats' in dirs:
             with open(input('Назвать файл с объединенными распарсенными файлами: '), 'w', encoding='utf-8') as new_file:
                 json.dump(connect_parsed(dirs, files), new_file, ensure_ascii=False, indent=1)
